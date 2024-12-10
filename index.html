@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Crud - API JS</title>
+</head>
+<body>
+
+      <ul></ul>
+
+      <script>
+            window.addEventListener("load", (event) => {
+                  // Busca dados
+                  fetch("http://localhost:3000/categoria")
+                  .then(response => {
+                  if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                  }
+                        return response.json();
+                  })
+                  .then(data => {
+                        data.map((categoria) => {
+                              // Gera os dados
+                              let listEl = document.querySelector("ul")
+                              let itemListEl = document.createElement("li")
+
+                              let itemNameListEl = document.createElement("span")
+                              itemNameListEl.setAttribute.key = categoria.id
+                              itemNameListEl.textContent = categoria.name
+                              itemListEl.appendChild(itemNameListEl)
+
+                              let itemDescListEl = document.createElement("span")
+                              itemDescListEl.setAttribute.key = categoria.id
+                              itemDescListEl.textContent = " | " + categoria.desc
+                              itemListEl.appendChild(itemDescListEl)
+
+                              listEl.appendChild(itemListEl)
+                        })
+                  })
+                  .catch(error => {
+                        console.error("Error fetching data:", error);
+                  })
+            });
+      </script>
+</body>
+</html>
