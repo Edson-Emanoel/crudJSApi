@@ -104,6 +104,7 @@
       <ul></ul>
 
       <script>
+            // Lista
             window.addEventListener("load", (event) => {
                   // Busca dados
                   fetch("http://localhost:3000/categoria")
@@ -136,28 +137,40 @@
                         console.error("Error fetching data:", error);
                   })
             });
-      
+            
+            // Cadastra
             const form = document.getElementById("form");
-
-            form.addEventListener("submit", (e) => {
+            form.addEventListener("submit", async (e) => {
                   e.preventDefault()
 
                   const nome = document.getElementById("nome");
                   const desc = document.getElementById("desc");
 
-                  const userData = {
-                        name: nome.value, desc: desc.value
+                  try{
+                        const response = await fetch("http://localhost:3000/categoria?name=" + nome.value)
+                        const categorias = await response.json();
+
+                        if(categorias.length > 0){
+                              alert("A Categoria já existe (▔﹏▔)")
+                        }else {
+                              const userData = {
+                                    name: nome.value, desc: desc.value
+                              }
+
+                              fetch("http://localhost:3000/categoria", {
+                                    method: 'POST',
+                                    body: JSON.stringify(userData)
+                              })
+                              .then((data) => {
+                                    alert("Categoria cadastrada com sucesso");
+
+                                    form.reset();
+                              })
+                        }
+                  } catch (erro) {
+                        console.error("Erro:", erro);
+                        alert("Erro ao cadastrar, pois a Categoria já é existente")
                   }
-
-                  fetch("http://localhost:3000/categoria", {
-                        method: 'POST',
-                        body: JSON.stringify(userData)
-                  })
-                  .then((data) => {
-                        alert("Categoria cadastrada com sucesso");
-
-                        form.reset();
-                  })
             })
       </script>
 </body>
