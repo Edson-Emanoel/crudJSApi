@@ -4,9 +4,103 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Crud - API JS</title>
+      <style>
+            *{
+                  margin: 0;
+                  padding: 0;
+                  box-sizing: border-box;
+
+                  font-family: system-ui, sans-serif;
+            }
+            
+            body {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  flex-direction: column;
+
+                  color: #F7F7F7;
+                  background-color: #333;
+            }
+
+            h2 {
+                  margin-top: 20px;
+                  margin-bottom: 10px;
+            }
+            ul {
+                  list-style: none;
+
+                  display: flex;
+                  flex-direction: column;
+                  gap: 10px;
+            }
+            li{
+                  text-align: center;
+
+                  border-radius: 5px;
+                  padding: 15px 10px;
+                  background-color: #1d1d1d;
+            }
+
+            form {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  flex-direction: column;
+            }
+            label {
+                  margin-bottom: 5px;
+            }
+            form div {
+                  display: flex;
+                  flex-direction: column;
+            }
+            input {
+                  border: none;
+                  outline: none;
+
+                  width: 250px;
+                  height: 35px;
+                  margin-bottom: 14px;
+
+                  padding-left: 2px;
+                  border-radius: 4px;
+
+                  color: #F7F7F7;
+                  background-color: #1D1D1D;
+            }
+            button {
+                  width: 85px;
+                  height: 30px;
+
+                  border: none;
+                  outline: none;
+                  cursor: pointer;
+                  border-radius: 4px;
+
+                  color: #F7F7F7;
+                  background-color: #25319A;
+            }
+      </style>
 </head>
 <body>
 
+      <h2>Cadastro de Categoria</h2>
+      <form action="#" id="form">
+            <div>
+                  <label for="nome">Nome da Categoria</label>
+                  <input type="text" id="nome" placeholder="Digite o nome da Categoria" required>
+            </div>
+ 
+            <div>
+                  <label for="desc">Descrição da Categoria</label>
+                  <input type="text" id="desc" placeholder="Digite uma Descrição para Categoria">
+            </div>
+ 
+            <button class="btn-Cadatrar" type="submit">Cadastrar</button>
+      </form>
+
+      <h2>Lista de Categorias</h2>
       <ul></ul>
 
       <script>
@@ -42,6 +136,29 @@
                         console.error("Error fetching data:", error);
                   })
             });
+      
+            const form = document.getElementById("form");
+
+            form.addEventListener("submit", (e) => {
+                  e.preventDefault()
+
+                  const nome = document.getElementById("nome");
+                  const desc = document.getElementById("desc");
+
+                  const userData = {
+                        name: nome.value, desc: desc.value
+                  }
+
+                  fetch("http://localhost:3000/categoria", {
+                        method: 'POST',
+                        body: JSON.stringify(userData)
+                  })
+                  .then((data) => {
+                        alert("Categoria cadastrada com sucesso");
+
+                        form.reset();
+                  })
+            })
       </script>
 </body>
 </html>

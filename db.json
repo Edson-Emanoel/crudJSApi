@@ -1,9 +1,14 @@
 {
-      "categoria": [
-            {
-                  "id": "dvas",
-                  "name": "Consoles",
-                  "desc": "Consoles de várias empresas"
-            }
-      ]
+  "categoria": [
+    {
+      "id": "dvas",
+      "name": "Consoles",
+      "desc": "Consoles de várias empresas"
+    },
+    {
+      "id": "f76e",
+      "name": "Testes Unitários",
+      "desc": "Testes de cada coisa da aplicação"
+    }
+  ]
 }
